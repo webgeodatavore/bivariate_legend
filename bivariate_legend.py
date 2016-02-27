@@ -21,14 +21,14 @@
  ***************************************************************************/
 """
 from PyQt4.QtCore import (QSettings, QTranslator, qVersion, QCoreApplication,
-                          Qt, QRectF)
+                          Qt)
 from PyQt4.QtGui import (QAction, QIcon, QImage, QPainter, QColor, QPixmap,
                          QGraphicsScene, QFileDialog, QTransform)
 # Initialize Qt resources from file resources.py
 import resources
 
 # Import QGIS components
-from qgis.gui import QgsBlendModeComboBox, QgsMapLayerProxyModel
+from qgis.gui import QgsMessageBar, QgsBlendModeComboBox, QgsMapLayerProxyModel
 
 # Import the code for the DockWidget
 from bivariate_legend_dockwidget import BivariateLegendDockWidget
@@ -227,12 +227,10 @@ class BivariateLegend:
     def export_legend(self):
         """Export legend to image."""
         if (self.image_output is not None):
-            dialog_image = QFileDialog(
+            filename = QFileDialog(
                 filter='JPG and PNG files (*.jpeg *.jpg *.png)'
-            )
-            filename = dialog_image.getSaveFileName()
+            ).getSaveFileName()
             if filename:
-                print dialog_image.selectedNameFilter()
                 self.image_output.save(filename, 'PNG')
 
     def square_width_changed(self, int_val):
@@ -329,14 +327,6 @@ class BivariateLegend:
 
         # TODO: QgsRuleBasedRendererV2 to manage later
         # TODO: Filter based on renderer type
-        # allowed_styles = [
-        #     QgsCategorizedSymbolRendererV2,
-        #     QgsGraduatedSymbolRendererV2
-        # ]
-        # print True in [isinstance(
-        #     l_top.rendererV2(),
-        #     i
-        # ) for i in allowed_styles]
         if (l_top.id() != l_bottom.id()):
 
             colors_layer_top = self.get_colors_from_layer(
@@ -351,8 +341,6 @@ class BivariateLegend:
             # Set default values
             len_color_layer_top = len(colors_layer_top)
             len_color_layer_bottom = len(colors_layer_bottom)
-            width = self.square_width_cell * len_color_layer_bottom
-            height = self.square_width_cell * len_color_layer_top
 
             # Draw image on top
             img_top = self.generate_image_for_colors(
@@ -362,7 +350,6 @@ class BivariateLegend:
                 self.square_width_cell,
                 reverse=False
             )
-            img_top.save('/tmp/image_top.png')  # Debug top image
             img_bottom = self.generate_image_for_colors(
                 colors_layer_bottom,
                 len_color_layer_bottom,
@@ -370,16 +357,9 @@ class BivariateLegend:
                 self.square_width_cell,
                 reverse=True
             )
-            img_bottom.save('/tmp/image_bottom.png')  # Debug bottom image
 
             # Create a new painter to merge images
             painter = QPainter()
-            # m_paint_flags = QPainter.RenderHint(
-            #     QPainter.Antialiasing |
-            #     QPainter.SmoothPixmapTransform |
-            #     QPainter.HighQualityAntialiasing
-            # )
-            # painter.setRenderHints(m_paint_flags)
             # Declare transform function to rotate axis to switch x and y
             trans = QTransform()
 
@@ -389,27 +369,7 @@ class BivariateLegend:
             painter.setCompositionMode(self.blend_mode)
             # TODO: Manage border when pen color
             painter.drawImage(0, 0, img_bottom)
-            # painter.setCompositionMode(QPainter.CompositionMode_SourceOver)
-            # borders = self.generate_border(
-            #     len_color_layer_bottom,
-            #     len_color_layer_top,
-            #     self.square_width_cell
-            # )
-            # borders.save('/tmp/image_borders.png')
-            # painter.drawImage(0, 0, borders)
             painter.end()
-
-            # painter1 = QPainter()
-            # shallow_copy_image = QImage(img_top)
-            # painter1.begin(shallow_copy_image)
-            # painter1.setCompositionMode(QPainter.CompositionMode_SourceOver)
-            # borders = self.generate_border(
-            #     len_color_layer_bottom,
-            #     len_color_layer_top,
-            #     self.square_width_cell
-            # )
-            # painter1.drawImage(0, 0, borders)
-            # painter1.end()
 
             # Rotate if necessary
             if self.invert_axis:
@@ -423,8 +383,15 @@ class BivariateLegend:
             scene.addPixmap(item)
             self.dockwidget.graphic_preview.setScene(scene)
             # Keep reference to image to ease image export
-            img_top.save('/tmp/image_end.png')
             self.image_output = img_top
+        else:
+            self.iface.messageBar().pushMessage(
+                "Information",
+                """Choose two different layers.
+                Otherwise, no image overview will be generated.
+                """,
+                level=QgsMessageBar.INFO
+            )
 
     def run(self):
         """Run method that loads and starts the plugin."""

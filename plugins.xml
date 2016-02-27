@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugins>
+  <pyqgis_plugin name="Bivariate legend" version="0.1">
+    <qgis_minimum_version>2.0</qgis_minimum_version>
+    <description>This plugin helps creating bivariate legends</description>
+    <file_name>0.1.zip</file_name>
+    <author_name>WebGeoDataVore</author_name>
+    <download_url>https://bitbucket.org/gpiffault/qgis-plugins/downloads/</download_url>
+  </pyqgis_plugin>
+</plugins>

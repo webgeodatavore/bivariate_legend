@@ -1,0 +1,29 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="/static/style/plugins.xsl" ?>
+<plugins>
+    <pyqgis_plugin name="AccurAssess" version="0.2" plugin_id="561">
+        <description><![CDATA[Carry out the accuracy assessment of a thematic categorical map taking into account the sampling design.]]></description>
+        <about></about>
+        <version>0.2</version>
+        <qgis_minimum_version>2.8.0</qgis_minimum_version>
+        <qgis_maximum_version>2.99.0</qgis_maximum_version>
+        <homepage><![CDATA[http://github.com/webgeodatavore/bivariate_legend/]]></homepage>
+        <file_name>AccurAssess.0.2.zip</file_name>
+        <icon>/static/packages/2015/icon_217.png</icon>
+        <author_name><![CDATA[Thomas Gratier]]></author_name>
+        <download_url>http://plugins.qgis.org/plugins/AccurAssess/version/0.2/download/</download_url>
+        <uploaded_by><![CDATA[]]></uploaded_by>
+        <create_date>2016-02-27T12:57:25.553811</create_date>
+        <update_date>2016-02-27T12:57:25.553811</update_date>
+        <experimental>True</experimental>
+        <deprecated>False</deprecated>
+        <tracker><![CDATA[http://github.com/webgeodatavore/AccurAssess/issues]]></tracker>
+        <repository><![CDATA[https://github.com/JaimeLoya/AccurAssess]]></repository>
+        <tags><![CDATA[raster,vector,sampling desing,accuracy]]></tags>
+        <downloads></downloads>
+        <average_vote></average_vote>
+        <rating_votes></rating_votes>
+        <external_dependencies></external_dependencies>
+        <server>False</server>
+    </pyqgis_plugin>
+</plugins>
