@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/BivariateLegend" >
+        <file>icon.png</file>
+    </qresource>
+</RCC>

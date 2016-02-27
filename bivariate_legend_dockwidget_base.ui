@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dockwidget</class>
+ <widget class="QDockWidget" name="Dockwidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>417</width>
+    <height>455</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Bivariate legend</string>
+  </property>
+  <widget class="QWidget" name="dockWidgetContents">
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>12</x>
+      <y>16</y>
+      <width>391</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_4">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetNoConstraint</enum>
+     </property>
+     <item>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_layer_1">
+         <property name="text">
+          <string>Top layer</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QgsMapLayerComboBox" name="map_layer_combobox_1"/>
+       </item>
+       <item row="0" column="2">
+        <widget class="QCheckBox" name="checkbox_layer_1">
+         <property name="text">
+          <string>Reverse colors</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_layer_2">
+         <property name="text">
+          <string>Bottom layer</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QgsMapLayerComboBox" name="map_layer_combobox_2"/>
+       </item>
+       <item row="1" column="2">
+        <widget class="QCheckBox" name="checkbox_layer_2">
+         <property name="text">
+          <string>Reverse colors</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Square width</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QSpinBox" name="square_width_cell">
+         <property name="maximum">
+          <number>2000</number>
+         </property>
+         <property name="value">
+          <number>20</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QCheckBox" name="invert_axis">
+         <property name="text">
+          <string>Rotate to switch
+X and Y axis</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QPushButton" name="generate_legend">
+       <property name="text">
+        <string>Generate legend</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGraphicsView" name="graphic_preview">
+       <property name="backgroundBrush">
+        <brush brushstyle="NoBrush">
+         <color alpha="255">
+          <red>0</red>
+          <green>0</green>
+          <blue>0</blue>
+         </color>
+        </brush>
+       </property>
+       <property name="resizeAnchor">
+        <enum>QGraphicsView::AnchorViewCenter</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="export_legend">
+       <property name="text">
+        <string>Export legend to image</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <zorder>map_layer_combobox_2</zorder>
+   <zorder>map_layer_combobox_1</zorder>
+   <zorder>label_layer_1</zorder>
+   <zorder>label_layer_2</zorder>
+   <zorder>graphic_preview</zorder>
+   <zorder>generate_legend</zorder>
+   <zorder>graphic_preview</zorder>
+   <zorder>square_width_cell</zorder>
+   <zorder>label</zorder>
+   <zorder>checkbox_layer_1</zorder>
+   <zorder>checkbox_layer_2</zorder>
+   <zorder>export_legend</zorder>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QgsMapLayerComboBox</class>
+   <extends>QComboBox</extends>
+   <header>qgsmaplayercombobox.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

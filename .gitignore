@@ -1,0 +1,4 @@
+*.pyc
+*~
+help/build/
+resources.py
