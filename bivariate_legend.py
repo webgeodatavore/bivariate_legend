@@ -20,22 +20,28 @@
  *                                                                         *
  ***************************************************************************/
 """
-from PyQt4.QtCore import (QSettings, QTranslator, qVersion, QCoreApplication,
-                          Qt)
-from PyQt4.QtGui import (QAction, QIcon, QImage, QPainter, QColor, QPixmap,
-                         QGraphicsScene, QFileDialog, QTransform)
+from __future__ import print_function
+from __future__ import absolute_import
+from builtins import range
+from builtins import object
+from PyQt5.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, Qt
+from PyQt5.QtWidgets import QAction, QGraphicsScene, QFileDialog
+from PyQt5.QtGui import QIcon, QImage, QPainter, QColor, QPixmap, QTransform
 # Initialize Qt resources from file resources.py
-import resources
+from .resources import *
 
 # Import QGIS components
-from qgis.gui import QgsMessageBar, QgsBlendModeComboBox, QgsMapLayerProxyModel
+from qgis.gui import QgsMessageBar, QgsBlendModeComboBox
+from qgis.core import QgsMapLayerProxyModel, QgsRenderContext
 
 # Import the code for the DockWidget
-from bivariate_legend_dockwidget import BivariateLegendDockWidget
+from .bivariate_legend_dockwidget import BivariateLegendDockWidget
 import os.path
 
+renderContext = QgsRenderContext()
 
-class BivariateLegend:
+
+class BivariateLegend(object):
     """QGIS Plugin Implementation."""
 
     def __init__(self, iface):
@@ -213,7 +219,7 @@ class BivariateLegend:
     def get_colors_from_layer(layer, reverse=False):
         """Extract colors from vector layer styles."""
         colors_layer = []
-        symbols_layer = layer.rendererV2().symbols()
+        symbols_layer = layer.renderer().symbols(renderContext)
         if reverse:
             symbols_layer = reversed(symbols_layer)
         for sym in symbols_layer:
@@ -230,8 +236,8 @@ class BivariateLegend:
             filename = QFileDialog(
                 filter='JPG and PNG files (*.jpeg *.jpg *.png)'
             ).getSaveFileName()
-            if filename:
-                self.image_output.save(filename, 'PNG')
+            if filename and isinstance(filename, tuple):
+                self.image_output.save(filename[0], 'PNG')
 
     def square_width_changed(self, int_val):
         """Change square size for a cell."""
@@ -300,7 +306,8 @@ class BivariateLegend:
             QPainter,
             enum_composition_mode[self.blend_mode_combo_box.blendMode()]
         )
-        print enum_composition_mode[self.blend_mode_combo_box.blendMode()]
+        # fix_print_with_import
+        print(enum_composition_mode[self.blend_mode_combo_box.blendMode()])
 
     def add_blend_mode_combobox(self):
         """Add blend mode combobox."""
@@ -325,7 +332,7 @@ class BivariateLegend:
         l_top = self.dockwidget.map_layer_combobox_1.currentLayer()
         l_bottom = self.dockwidget.map_layer_combobox_2.currentLayer()
 
-        # TODO: QgsRuleBasedRendererV2 to manage later
+        # TODO: QgsRuleBasedRenderer to manage later
         # TODO: Filter based on renderer type
         if (l_top.id() != l_bottom.id()):
 
@@ -390,7 +397,7 @@ class BivariateLegend:
                 """Choose two different layers.
                 Otherwise, no image overview will be generated.
                 """,
-                level=QgsMessageBar.INFO
+                level=Qgis.Info
             )
 
     def run(self):

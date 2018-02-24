@@ -8,7 +8,7 @@
 
 [general]
 name=Bivariate legend
-qgisMinimumVersion=2.0
+qgisMinimumVersion=3.0
 description=This plugin helps creating bivariate legends
 version=0.1
 author=WebGeoDataVore
@@ -32,7 +32,7 @@ homepage=http://github.com/webgeodatavore/bivariate_legend/
 category=Vector
 icon=icon.png
 # experimental flag
-experimental=True
+experimental=False
 
 # deprecated flag (applies to the whole plugin, not just a single version)
 deprecated=False

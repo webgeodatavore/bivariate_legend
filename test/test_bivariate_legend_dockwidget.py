@@ -7,6 +7,7 @@
      (at your option) any later version.
 
 """
+from __future__ import absolute_import
 
 __author__ = 'thomas.gratier@webgeodatavore.com'
 __date__ = '2016-02-25'
@@ -14,11 +15,11 @@ __copyright__ = 'Copyright 2016, WebGeoDataVore'
 
 import unittest
 
-from PyQt4.QtGui import QDockWidget
+from qgis.PyQt.QtWidgets import QDockWidget
 
 from bivariate_legend_dockwidget import BivariateLegendDockWidget
 
-from utilities import get_qgis_app
+from .utilities import get_qgis_app
 
 QGIS_APP = get_qgis_app()
 

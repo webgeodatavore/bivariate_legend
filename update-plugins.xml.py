@@ -3,8 +3,10 @@
 # https://bitbucket.org/gpiffault/qgis-plugins/wiki/Home
 # We only commented the default XSL stylesheet
 
+from future import standard_library
+standard_library.install_aliases()
 import os
-import ConfigParser
+import configparser
 
 
 def xml_lib():
@@ -20,7 +22,7 @@ def xml_lib():
     metadata = os.path.join('.', 'metadata.txt')
     if os.path.isfile(metadata):
         # Parse config
-        config = ConfigParser.RawConfigParser()
+        config = configparser.RawConfigParser()
         config.read(metadata)
         # import ipdb; ipdb.set_trace()
         # Create xml elements
