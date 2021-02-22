@@ -10,7 +10,7 @@
 name=Bivariate legend
 qgisMinimumVersion=3.0
 description=This plugin helps creating bivariate legends
-version=1.0.1
+version=1.0.2
 author=WebGeoDataVore
 email=thomas.gratier@webgeodatavore.com
 
