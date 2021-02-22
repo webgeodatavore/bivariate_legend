@@ -32,7 +32,7 @@ from .resources import *
 
 # Import QGIS components
 from qgis.gui import QgsMessageBar, QgsBlendModeComboBox
-from qgis.core import QgsMapLayerProxyModel, QgsRenderContext
+from qgis.core import QgsMapLayerProxyModel, QgsRenderContext, Qgis
 
 # Import the code for the DockWidget
 from .bivariate_legend_dockwidget import BivariateLegendDockWidget
